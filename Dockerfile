@@ -14,4 +14,4 @@ COPY . .
  
 RUN yarn prisma:generate
 
-CMD ["sh", "-c", "yarn && npx prisma migrate reset --force && yarn start:dev"]
+CMD ["sh", "-c", "yarn && yarn prisma:reset && yarn start:dev"]
