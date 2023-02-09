@@ -112,7 +112,7 @@ async function main() {
           incorrectAnswers: [
             'Uther the Lightbringer',
             'Alexandros Mograine',
-            'Sargeras%2C The Daemon Lord',
+            'Sargeras, The Daemon Lord',
           ],
         },
         {
