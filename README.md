@@ -1,73 +1,50 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Nest Quiz
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Sumário
+- [Requisitos](#requisitos)
+- [Requisitos](#configuração)
+- [Endpoints](#endpoints)
+- [Tecnologias](#tecnologias)
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+### Requisitos
+- [Docker e Docker Compose](https://www.docker.com/products/docker-desktop/)
 
-## Description
+### Configuração 
+- Faça o download do docker e docker-compose e certifique-se de que os mesmos estão funcionando. O projeto está totalmente dockerizado sendo assim essas ferramentas são necessárias para o funcionamento correto da aplicação.
+- Faça a clonagem do projeto para sua máquina:
+```
+https://github.com/jpdrsanchez/nest-quiz
+cd nest-quiz
+``` 
+- Dentro da pasta do projeto, rode o seguinte comando para iniciar o build da nossa imagem e inicia-la:
+```
+docker compose up -d --build
+``` 
+- Para para os containers rode o comando:
+```
+docker compose down
+``` 
+- Das proximas vezes que for inicializar o container, caso a imagem já esteja salva em sua máquina, basta rodar o comando:
+```
+docker compose up -d
+``` 
+- Nosso projeto utiliza o Prisma como ORM e possuí um arquivo de seed que roda no banco de dados sempre que fazemos o build da imagem para cadastrarmos informações iniciais no banco. Caso queira mudar essas infos, basta editar o arquivo em `/prisma/seeder.ts` e depois rodar o seguinte comando:
+```
+docker compose exec nestjs yarn prisma:reset
+``` 
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+### Endpoints
+**GET** `api/questions/:id`
+`:id`: *integer*
 
-## Installation
-
-```bash
-$ yarn install
+Exemplos:
+```
+http://localhost:3000/api/questions/1
+http://localhost:3000/api/questions/2
+http://localhost:3000/api/questions/3
 ```
 
-## Running the app
-
-```bash
-# development
-$ yarn run start
-
-# watch mode
-$ yarn run start:dev
-
-# production mode
-$ yarn run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
-$ yarn run test
-
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+### Tecnologias
+- [Nestjs](https://nestjs.com/): Framework node.js.
+- [TypeScript](https://www.typescriptlang.org/): Superset que adiciona tipagem estática ao javascript.
+- [Prisma](https://www.prisma.io/): ORM node.js
